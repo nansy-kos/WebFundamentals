@@ -1,11 +1,3 @@
-project_path: /web/fundamentals/_project.yaml
-book_path: /web/fundamentals/_book.yaml
-description: Media Source Extensions (MSE) is a JavaScript API that lets you build streams for playback from segments of audio or video.
-
-{# wf_published_on: 2017-02-08 #}
-{# wf_updated_on: 2018-09-20 #}
-{# wf_blink_components: Internals>Media #}
-
 # Media Source Extensions {: .page-title }
 
 {% include "web/_shared/contributors/josephmedley.html" %}
@@ -28,7 +20,6 @@ needed if you want to embed videos in your site that do things like:
   <figcaption><b>Figure 1</b>: Basic MSE data flow</figcaption>
 </figure>
 
-You can almost think of MSE as a chain. As illustrated in the figure, between
 the downloaded file and the media elements are several layers.
 
 +  An `<audio>` or `<video>` element to play the media.
@@ -97,18 +88,18 @@ Here, in no particular order, are a few things I won't cover.
 
 Here are some things I'd recommend in a production usage of MSE related APIs:
 
-- Before making calls on these APIs, handle any error events or API
+- These values can change before associated events are
+  delivered.Before making calls on these APIs, handle any error events or API
   exceptions, and check `HTMLMediaElement.readyState` and
-  `MediaSource.readyState`. These values can change before associated events are
-  delivered.
-- Make sure previous `appendBuffer()` and `remove()` calls are not still in
+  `MediaSource.readyState`.  
+- For all `SourceBuffer` instances added to your `MediaSource`, ensure none of
+  their `updating` values are true before calling `MediaSource.endOfStream()`
+  or updating the `MediaSource.duration`.
+  - Make sure previous `appendBuffer()` and `remove()` calls are not still in
   progress by checking the `SourceBuffer.updating` boolean value before
   updating the `SourceBuffer`'s `mode`, `timestampOffset`, `appendWindowStart`,
   `appendWindowEnd`, or calling `appendBuffer()` or `remove()` on the
   `SourceBuffer`.
-- For all `SourceBuffer` instances added to your `MediaSource`, ensure none of
-  their `updating` values are true before calling `MediaSource.endOfStream()`
-  or updating the `MediaSource.duration`.
 - If `MediaSource.readyState` value is `ended`, calls like `appendBuffer()` and
   `remove()`, or setting `SourceBuffer.mode` or `SourceBuffer.timestampOffset`
   will cause this value to transition to `open`. This means you should be
