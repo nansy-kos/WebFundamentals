@@ -6,7 +6,7 @@ description: This is the page description placed in the head.
 {# wf_published_on: 2016-09-13 #}
 {# wf_blink_components: N/A #}
 
-# Writing an Article {: .page-title }
+# 글 작성 {: .page-title}
 
 {% include "web/_shared/contributors/petelepage.html" %}
 
@@ -58,7 +58,7 @@ For example:
 
 Caution: Page titles should not include any markdown or HTML tags.
 
-## Author and Translator Attribution
+## 작성자 및 번역사 저작자 표시
 
 To include an author or translator attribution, use:
 
